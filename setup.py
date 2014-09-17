@@ -11,6 +11,7 @@ readme = open('README.rst').read()
 
 requirements = [
     'kombu>=3.0.16',
+    'cryptography>=0.5.4',
 ]
 
 test_requirements = [
@@ -18,7 +19,7 @@ test_requirements = [
 ]
 
 setup(
-    name='kombu_encrypted_serializer',
+    name='kombu-encrypted-serializer',
     version='0.1.0',
     description='Kombu encrypted serializer',
     long_description=readme,
