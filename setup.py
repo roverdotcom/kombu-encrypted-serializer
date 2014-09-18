@@ -15,7 +15,9 @@ requirements = [
 ]
 
 test_requirements = [
-    # TODO: put package test requirements here
+    'mock>=1.0.1',
+    'PyYaml>=3.11',
+    'msgpack-python>=0.4.2',
 ]
 
 setup(
