@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-
 from __future__ import absolute_import
 
+import os
 import base64
 
 from cryptography.fernet import Fernet
@@ -20,13 +20,21 @@ def b64decode(s):
 
 class EncryptedSerializer(object):
     def __init__(self, key=None, serializer='pickle'):
-        self._key = key
+        if key:
+            set_key = key
+        elif os.environ.get("KOMBU_ENCRYPTED_SERIALIZER_KEY"):
+            set_key = os.environ.get("KOMBU_ENCRYPTED_SERIALIZER_KEY")
+        else:
+            # TODO: Create exception classes
+            raise Exception('You must provide a key.')
+
+        self._key = set_key
         self._serializer = serializer
         self._load_codec()
 
         # TODO: Set this up better, catching an incorrect key
         # error and giving a better explanation in this context.
-        self.fernet = Fernet(key)
+        self.fernet = Fernet(self._key)
 
     def serialize(self, data):
         content_type, content_encoding, body = dumps(

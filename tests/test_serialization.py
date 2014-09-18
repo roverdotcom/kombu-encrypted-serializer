@@ -3,6 +3,7 @@
 from __future__ import absolute_import
 
 import unittest
+from unittest.mock import patch
 
 from . import KombuEncryptionTestCase
 
@@ -65,6 +66,17 @@ class TestYamlSerialization(TestSerializationBase, KombuEncryptionTestCase):
         super(TestYamlSerialization, self).setUp()
         self.serializer = EncryptedSerializer(
             key=self.key, serializer='yaml')
+
+
+class TestEncryptedSerializer(KombuEncryptionTestCase):
+    @patch.dict('os.environ', {
+        "KOMBU_ENCRYPTED_SERIALIZER_KEY": 'KEY',
+    })
+    @patch("kombu_encrypted_serializer.serialization.Fernet")
+    def test_key_is_passed_from_an_environment_variable(self, fernet_mock):
+        e = EncryptedSerializer()
+        fernet_mock.assert_called_with('KEY')
+        self.assertEqual(e._key, 'KEY')
 
 
 if __name__ == '__main__':
