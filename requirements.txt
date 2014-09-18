@@ -3,3 +3,4 @@ kombu==3.0.16
 cryptography==0.5.4
 msgpack-python==0.4.2
 PyYAML==3.11
+mock==1.0.1
