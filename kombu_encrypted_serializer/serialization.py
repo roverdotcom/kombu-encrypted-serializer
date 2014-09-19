@@ -73,4 +73,3 @@ def setup_encrypted_serializer(key, serializer='pickle'):
         content_type='application/x-encrypted-serializer',
         content_encoding='utf-8',
     )
-    registry._set_default_serializer('encrypted')
