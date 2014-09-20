@@ -1,0 +1,5 @@
+-r base.txt
+msgpack-python==0.4.2
+PyYAML==3.11
+mock==1.0.1
+wheel==0.23.0
