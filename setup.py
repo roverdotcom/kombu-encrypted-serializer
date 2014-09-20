@@ -7,7 +7,7 @@ except ImportError:
     from distutils.core import setup
 
 
-readme = open('README.md').read()
+readme = open('README.rst').read()
 
 requirements = [
     'kombu>=3.0.16',
