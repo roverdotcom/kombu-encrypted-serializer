@@ -27,7 +27,7 @@ setup(
     long_description=readme,
     author='Bryan Shelton',
     author_email='bryan@rover.com',
-    url='https://github.com/bshelton229/kombu-encrypted-serializer',
+    url='https://github.com/roverdotcom/kombu-encrypted-serializer',
     packages=[
         'kombu_encrypted_serializer',
     ],
@@ -37,9 +37,8 @@ setup(
     install_requires=requirements,
     license="MIT",
     zip_safe=False,
-    keywords='kombu_encryption_serializer',
+    keywords='kombu_encrypted_serializer',
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
