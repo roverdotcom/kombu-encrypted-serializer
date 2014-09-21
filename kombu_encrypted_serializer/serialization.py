@@ -57,14 +57,3 @@ class EncryptedSerializer(object):
         codec = self._codec = registry._encoders.get(self._serializer)
         self._serializer_content_type = codec.content_type
         self._serializer_content_encoding = codec.content_encoding
-
-
-def setup_encrypted_serializer(key, serializer='pickle'):
-    encrypted_serializer = EncryptedSerializer(key, serializer=serializer)
-    registry.register(
-        'encrypted',
-        encrypted_serializer.serialize,
-        encrypted_serializer.deserialize,
-        content_type='application/x-encrypted-serializer',
-        content_encoding='utf-8',
-    )

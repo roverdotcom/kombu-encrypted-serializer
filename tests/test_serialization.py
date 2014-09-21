@@ -4,10 +4,7 @@ from __future__ import absolute_import
 
 import unittest
 
-try:
-    from unittest.mock import patch
-except ImportError:
-    from mock import patch
+from mock import patch
 
 from . import KombuEncryptionTestCase
 
@@ -68,7 +65,7 @@ class YamlSerializationTests(SerializationTestsBase, KombuEncryptionTestCase):
             key=self.key, serializer='yaml')
 
 
-class TestEncryptedSerializer(KombuEncryptionTestCase):
+class EncryptedSerializerTests(KombuEncryptionTestCase):
     @patch.dict('os.environ', {
         "KOMBU_ENCRYPTED_SERIALIZER_KEY": 'KEY',
     })
@@ -77,6 +74,9 @@ class TestEncryptedSerializer(KombuEncryptionTestCase):
         e = EncryptedSerializer()
         fernet_mock.assert_called_with('KEY')
         self.assertEqual(e._key, 'KEY')
+
+    def test_no_key_raises_exception(self):
+        self.assertRaises(Exception, EncryptedSerializer)
 
 
 if __name__ == '__main__':
