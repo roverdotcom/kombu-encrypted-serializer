@@ -35,7 +35,7 @@ lint:
 	flake8 kombu_encrypted_serializer tests
 
 test:
-	python setup.py test
+	python setup.py nosetests
 
 test-all:
 	tox

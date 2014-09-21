@@ -11,18 +11,12 @@ except ImportError:
 
 from . import KombuEncryptionTestCase
 
-from cryptography.fernet import Fernet, InvalidToken
+from cryptography.fernet import InvalidToken
 
 from kombu_encrypted_serializer.serialization import EncryptedSerializer
 
 
-class TestSerializationBase(object):
-
-    def setUp(self):
-        super(TestSerializationBase, self).setUp()
-        self.key = Fernet.generate_key()
-        self.serializer = EncryptedSerializer(key=self.key)
-
+class SerializationTestsBase(object):
     def _serialize_deserialize(self, data):
         serialized = self.serializer.serialize(data)
         return self.serializer.deserialize(serialized)
@@ -44,30 +38,32 @@ class TestSerializationBase(object):
         self.assertRaises(InvalidToken, self.serializer.deserialize, 'blah')
 
 
-class TestJsonSerialization(TestSerializationBase, KombuEncryptionTestCase):
+class JsonSerializationTests(SerializationTestsBase, KombuEncryptionTestCase):
     def setUp(self):
-        super(TestJsonSerialization, self).setUp()
+        super(JsonSerializationTests, self).setUp()
         self.serializer = EncryptedSerializer(
             key=self.key, serializer='json')
 
 
-class TestPickleSerialization(TestSerializationBase, KombuEncryptionTestCase):
+class PickleSerializationTests(
+        SerializationTestsBase, KombuEncryptionTestCase):
     def setUp(self):
-        super(TestPickleSerialization, self).setUp()
+        super(PickleSerializationTests, self).setUp()
         self.serializer = EncryptedSerializer(
             key=self.key, serializer='pickle')
 
 
-class TestMsgpackSerialization(TestSerializationBase, KombuEncryptionTestCase):
+class MsgpackSerializationTests(
+        SerializationTestsBase, KombuEncryptionTestCase):
     def setUp(self):
-        super(TestMsgpackSerialization, self).setUp()
+        super(MsgpackSerializationTests, self).setUp()
         self.serializer = EncryptedSerializer(
             key=self.key, serializer='msgpack')
 
 
-class TestYamlSerialization(TestSerializationBase, KombuEncryptionTestCase):
+class YamlSerializationTests(SerializationTestsBase, KombuEncryptionTestCase):
     def setUp(self):
-        super(TestYamlSerialization, self).setUp()
+        super(YamlSerializationTests, self).setUp()
         self.serializer = EncryptedSerializer(
             key=self.key, serializer='yaml')
 

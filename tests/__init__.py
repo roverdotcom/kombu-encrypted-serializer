@@ -2,6 +2,11 @@
 
 import unittest
 
+from cryptography.fernet import Fernet
+
+TEST_KEY = Fernet.generate_key()
+
 
 class KombuEncryptionTestCase(unittest.TestCase):
-    pass
+    def setUp(self):
+        self.key = TEST_KEY
