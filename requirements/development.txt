@@ -1,3 +1,6 @@
 -r test.txt
 coverage
 flake8
+celery>=3.1.15
+redis>=2.10.3
+-e .
