@@ -11,6 +11,7 @@ from . import KombuEncryptionTestCase
 from cryptography.fernet import InvalidToken
 
 from kombu_encrypted_serializer.serialization import EncryptedSerializer
+from kombu_encrypted_serializer.exceptions import MissingEncryptionKey
 
 
 class SerializationTestsBase(object):
@@ -76,7 +77,7 @@ class EncryptedSerializerTests(KombuEncryptionTestCase):
         self.assertEqual(e._key, 'KEY')
 
     def test_no_key_raises_exception(self):
-        self.assertRaises(Exception, EncryptedSerializer)
+        self.assertRaises(MissingEncryptionKey, EncryptedSerializer)
 
 
 if __name__ == '__main__':

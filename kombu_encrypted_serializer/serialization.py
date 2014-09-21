@@ -9,6 +9,11 @@ from cryptography.fernet import Fernet
 from kombu.serialization import registry, dumps, loads
 from kombu.utils.encoding import bytes_to_str, str_to_bytes, ensure_bytes
 
+from .exceptions import MissingEncryptionKey
+
+
+__all__ = ['EncryptedSerializer']
+
 
 def b64encode(s):
     return bytes_to_str(base64.b64encode(str_to_bytes(s)))
@@ -22,7 +27,7 @@ class EncryptedSerializer(object):
     def __init__(self, key=None, serializer='pickle'):
         self._key = key or os.environ.get("KOMBU_ENCRYPTED_SERIALIZER_KEY")
         if not self._key:
-            raise Exception('You must provide a key.')
+            raise MissingEncryptionKey('You must provide an encryption key')
 
         self._serializer = serializer
         self._load_codec()
