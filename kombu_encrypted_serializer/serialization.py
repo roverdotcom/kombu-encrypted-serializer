@@ -20,15 +20,10 @@ def b64decode(s):
 
 class EncryptedSerializer(object):
     def __init__(self, key=None, serializer='pickle'):
-        if key:
-            set_key = key
-        elif os.environ.get("KOMBU_ENCRYPTED_SERIALIZER_KEY"):
-            set_key = os.environ.get("KOMBU_ENCRYPTED_SERIALIZER_KEY")
-        else:
-            # TODO: Create exception classes
+        self._key = key or os.environ.get("KOMBU_ENCRYPTED_SERIALIZER_KEY")
+        if not self._key:
             raise Exception('You must provide a key.')
 
-        self._key = set_key
         self._serializer = serializer
         self._load_codec()
 
