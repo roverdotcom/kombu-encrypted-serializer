@@ -38,22 +38,11 @@ class SetupEncryptedSerializerTests(KombuEncryptionTestCase):
         setup_encrypted_serializer(self.key)
         self.assertEqual(1, self.register_mock.call_count)
 
-    def test_can_override_serializer_name(self):
-        name = setup_encrypted_serializer(self.key, name='new-name')
-        self.assertEqual(name, 'new-name')
-        self.register_mock.assert_called_once_with(
-            'new-name',
-            self.encrypted_serializer_mock_instance.serialize,
-            self.encrypted_serializer_mock_instance.deserialize,
-            content_type='application/x-new-name',
-            content_encoding='utf-8',
-        )
-
     def test_name_reflects_serializer_by_default(self):
         name = setup_encrypted_serializer(self.key, serializer='json')
-        self.assertEqual(name, 'encrypted-json')
+        self.assertEqual(name, 'encrypted_json')
         self.register_mock.assert_called_once_with(
-            'encrypted-json',
+            'encrypted_json',
             self.encrypted_serializer_mock_instance.serialize,
             self.encrypted_serializer_mock_instance.deserialize,
             content_type='application/x-encrypted-json',
@@ -63,7 +52,7 @@ class SetupEncryptedSerializerTests(KombuEncryptionTestCase):
     def test_kombu_serializer_registration(self):
         setup_encrypted_serializer(key=self.key, serializer='pickle')
         self.register_mock.assert_called_once_with(
-            'encrypted-pickle',
+            'encrypted_pickle',
             self.encrypted_serializer_mock_instance.serialize,
             self.encrypted_serializer_mock_instance.deserialize,
             content_type='application/x-encrypted-pickle',

@@ -9,15 +9,14 @@ __email__ = 'bryan@rover.com'
 __version__ = '0.1.0'
 
 
-def setup_encrypted_serializer(key=None, serializer='pickle', name=None):
+def setup_encrypted_serializer(key=None, serializer='pickle'):
     encrypted_serializer = EncryptedSerializer(key=key, serializer=serializer)
-    if not name:
-        name = "encrypted-{0}".format(serializer)
+    name = "encrypted_{0}".format(serializer)
     registry.register(
-        name,
+        "encrypted_{0}".format(serializer),
         encrypted_serializer.serialize,
         encrypted_serializer.deserialize,
-        content_type="application/x-{0}".format(name),
+        content_type="application/x-encrypted-{0}".format(serializer),
         content_encoding='utf-8',
     )
     return name
