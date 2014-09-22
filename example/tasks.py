@@ -6,13 +6,13 @@ from kombu_encrypted_serializer import setup_encrypted_serializer
 TEST_KEY = 'WgFNqB8eokKER0aFxEmfnK7qyZmGhGmxxOqccW3oZoM='
 os.environ['KOMBU_ENCRYPTED_SERIALIZER_KEY'] = TEST_KEY
 
-setup_encrypted_serializer(serializer='pickle')
+serializer_name = setup_encrypted_serializer(serializer='pickle')
 
 app = Celery('tasks', broker='redis://', backend='redis://')
 app.conf.update(
-    CELERY_TASK_SERIALIZER='encrypted',
-    CELERY_RESULT_SERIALIZER='encrypted',
-    CELERY_ACCEPT_CONTENT=['encrypted'],
+    CELERY_TASK_SERIALIZER=serializer_name,
+    CELERY_RESULT_SERIALIZER=serializer_name,
+    CELERY_ACCEPT_CONTENT=[serializer_name],
 )
 
 
