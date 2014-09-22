@@ -12,12 +12,12 @@ __version__ = '0.1.0'
 def setup_encrypted_serializer(key=None, serializer='pickle', name=None):
     encrypted_serializer = EncryptedSerializer(key=key, serializer=serializer)
     if not name:
-        name = "encrypted-{}".format(serializer)
+        name = "encrypted-{0}".format(serializer)
     registry.register(
         name,
         encrypted_serializer.serialize,
         encrypted_serializer.deserialize,
-        content_type="application/x-{}".format(name),
+        content_type="application/x-{0}".format(name),
         content_encoding='utf-8',
     )
     return name
