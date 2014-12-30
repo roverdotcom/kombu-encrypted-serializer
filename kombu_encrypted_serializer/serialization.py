@@ -32,8 +32,6 @@ class EncryptedSerializer(object):
         self._serializer = serializer
         self._load_codec()
 
-        # TODO: Set this up better, catching an incorrect key
-        # error and giving a better explanation in this context.
         self.fernet = Fernet(self._key)
 
     def serialize(self, data):
