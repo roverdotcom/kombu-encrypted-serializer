@@ -1,2 +1,2 @@
-kombu==3.0.22
+kombu==3.0.36
 cryptography==0.5.4
