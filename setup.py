@@ -16,7 +16,7 @@ requirements = [
 
 test_requirements = [
     'mock>=1.0.1',
-    'PyYaml>=3.11',
+    'PyYaml>=4.2b1',
     'msgpack-python>=0.4.2',
 ]
 
