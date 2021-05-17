@@ -11,12 +11,12 @@ readme = open('README.rst').read()
 
 requirements = [
     'kombu>=3.0.16',
-    'cryptography>=0.5.4',
+    'cryptography>=3.3.2',
 ]
 
 test_requirements = [
     'mock>=1.0.1',
-    'PyYaml>=4.2b1',
+    'PyYaml>=5.4.1',
     'msgpack-python>=0.4.2',
 ]
 
