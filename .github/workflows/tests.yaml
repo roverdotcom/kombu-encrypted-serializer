@@ -22,9 +22,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-        docker run --rm \
-          -v $PWD:/app \
-          -w /app \
-          -e KOMBU_VERSION=${{ matrix.kombu-version }} \
-          python:${{ matrix.python-version }} \
-          make install-and-test
+          docker run --rm \
+            -v $PWD:/app \
+            -w /app \
+            -e KOMBU_VERSION=${{ matrix.kombu-version }} \
+            python:${{ matrix.python-version }} \
+            make install-and-test
