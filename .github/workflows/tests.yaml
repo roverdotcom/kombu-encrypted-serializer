@@ -1,0 +1,30 @@
+name: Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+
+jobs:
+  # This workflow contains a single job called "build"
+  test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['2.7', '3.6']
+        kombu-version: ['3.0.36', '4.0.2']
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+        docker run --rm \
+          -v $PWD:/app \
+          -w /app \
+          -e KOMBU_VERSION=${{ matrix.kombu-version }} \
+          python:${{ matrix.python-version }} \
+          make install-and-test

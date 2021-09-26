@@ -34,6 +34,11 @@ clean-test:
 lint:
 	flake8 kombu_encrypted_serializer tests
 
+install-and-test:
+	pip install kombu==$(KOMBU_VERSION)
+	pip install -r requirements/test.txt
+	python setup.py nosetests
+
 test:
 	python setup.py nosetests
 
