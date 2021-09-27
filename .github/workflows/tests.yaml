@@ -17,7 +17,9 @@ jobs:
     continue-on-error: true
     strategy:
       matrix:
-        python-version: ['2.7', '3.6']
+        docker-image:
+          - 'python:2.7',
+          - 'python:3.6',
         kombu-version: ['3.0.36', '4.0.2']
 
     steps:
@@ -27,5 +29,5 @@ jobs:
             -v $PWD:/app \
             -w /app \
             -e KOMBU_VERSION=${{ matrix.kombu-version }} \
-            python:${{ matrix.python-version }} \
+            {{ matrix.docker-image }} \
             make install-and-test
