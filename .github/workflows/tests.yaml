@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         docker-image:
           - 'python:2.7'
@@ -25,8 +26,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - continue-on-error: false
-        run: |
+      - run: |
           docker run --rm \
             -v $PWD:/app \
             -w /app \
