@@ -18,8 +18,9 @@ jobs:
     strategy:
       matrix:
         docker-image:
-          - 'python:2.7',
-          - 'python:3.6',
+          - 'python:2.7'
+          - 'python:3.6'
+          - 'pypy:2.7'
         kombu-version: ['3.0.36', '4.0.2']
 
     steps:
