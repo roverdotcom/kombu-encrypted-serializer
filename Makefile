@@ -17,13 +17,13 @@ clean-pyc:
 	find . -name '__pycache__' -exec rm -fr {} +
 
 
-.PHNONY: release
+.PHONY: release
 release: clean
 	python setup.py sdist upload
 	python setup.py bdist_wheel upload
 
 
-.PHNONY: dist
+.PHONY: dist
 dist: clean
 	python setup.py sdist
 	python setup.py bdist_wheel
