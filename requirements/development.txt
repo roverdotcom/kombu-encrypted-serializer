@@ -1,8 +1,7 @@
 -r test.txt
-kombu==4.0.2
+kombu==5.2.3
 coverage
 flake8
 celery>=4.0.2
 redis>=2.10.3
-tox
 -e .

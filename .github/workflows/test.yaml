@@ -1,0 +1,29 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        python_version:
+          - "3.8"
+          - "3.10"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - uses: docker/build-push-action@v5
+        with:
+          push: false
+          target: test
+          build-args: |
+            RUN_ID=${{ github.run_id }}-${{ github.run_number }}
+            PYTHON_VERSION=${{ matrix.python_version }}
