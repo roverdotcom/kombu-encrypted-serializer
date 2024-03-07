@@ -17,12 +17,26 @@ clean-pyc:
 	find . -name '__pycache__' -exec rm -fr {} +
 
 
+.PHNONY: release
 release: clean
 	python setup.py sdist upload
 	python setup.py bdist_wheel upload
 
 
+.PHNONY: dist
 dist: clean
 	python setup.py sdist
 	python setup.py bdist_wheel
 	ls -l dist
+
+
+.PHONY: test
+test:
+	docker build \
+		--progress plain \
+		--target test \
+		--build-arg RUN_ID=$(shell date +%s) \
+		.
+
+
+.DEFAULT_GOAL := test
